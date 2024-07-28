@@ -39,6 +39,7 @@ public class TurtleServiceImpl implements TurtleService {
 
     @Override
     public Page<TurtleResponseDto> listTurtlesBySpecies(Pageable pageable, Long speciesId) {
+        speciesService.throwExceptionIfSpeciesNotFound(speciesId);
         return turtleRepository.findAllBySpeciesId(pageable, speciesId).map(TurtleResponseDto::of);
     }
 
